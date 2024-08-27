@@ -65,7 +65,7 @@ Follow these steps to set up the project:
 
    ```bash
    git clone https://github.com/sinanazem/numbeo-web-crawling.git
-   cd numbeo-web-crawling
+   cd web-crawling-numbeo
    ```
 
 2. **Build and Start Docker Containers**
