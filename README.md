@@ -1,5 +1,5 @@
 # Numbeo Web Crawling Project
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGA3vw_wtFHa10puzcFSaAbUJJovZMFCzDQA&s">
+<img src="https://pngimg.com/uploads/world_map/world_map_PNG28.png" width=550>
 
 This project involves scraping cost of living data from the Numbeo website, storing the data in a PostgreSQL database, and using Docker to manage the environment.
 
