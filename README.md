@@ -1,97 +1,122 @@
-# Numbeo Cost of Living Data Scraper
+# Numbeo Web Crawling Project
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGA3vw_wtFHa10puzcFSaAbUJJovZMFCzDQA&s">
 
-This project is a web scraping tool designed to extract cost of living data from the [Numbeo](https://www.numbeo.com/cost-of-living/) website. The data can be used for various analyses, such as comparing living costs between different cities or countries.
+This project involves scraping cost of living data from the Numbeo website, storing the data in a PostgreSQL database, and using Docker to manage the environment.
 
 ## Table of Contents
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Dependencies](#dependencies)
+- [Overview](#overview)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+- [Requirements](#requirements)
+- [Setup and Installation](#setup-and-installation)
+- [Usage](#usage)
 
-## Features
+## Overview
 
-- **Scrape Cost of Living Data**: Extracts detailed cost of living data including rent, groceries, transportation, and more.
-- **Customizable Scraping**: Easily adjust the script to scrape data for specific cities or countries.
-- **Output in Various Formats**: Save the scraped data in formats such as CSV, JSON, or Excel for further analysis.
-
-## Installation
-
-To get started, clone this repository to your local machine:
-
-```bash
-git clone https://github.com/your-username/numbeo-scraper.git
-cd numbeo-scraper
-```
-
-Install the required Python packages using pip:
-
-```bash
-pip install -r requirements.txt
-```
-
-## Usage
-
-To scrape data, run the following command:
-
-```bash
-python scraper.py
-```
-
-You can customize the cities or countries you want to scrape by modifying the `config.json` file:
-
-```json
-{
-    "cities": ["New York", "London", "Tokyo"]
-}
-```
-
-The scraped data will be saved in the `output/` directory by default.
-
-### Command-Line Arguments
-
-You can also pass command-line arguments to customize the scraping process:
-
-```bash
-python scraper.py --city "New York" --output-format "csv"
-```
-
-## Dependencies
-
-- Python 3.x
-- Requests
-- BeautifulSoup
-- Pandas
-
-These dependencies are listed in the `requirements.txt` file.
+The goal of this project is to extract country names from the Numbeo website, create a PostgreSQL database to store the cost of living data, and scrape cost of living information for each country and city. The project uses Docker and Docker Compose for containerization and environment management.
 
 ## Project Structure
 
-```plaintext
-numbeo-scraper/
-│
-├── scraper.py             # Main script for scraping data
-├── config.json            # Configuration file for cities/countries
-├── requirements.txt       # List of dependencies
-├── output/                # Directory where scraped data is saved
-│   └── example.csv
-├── README.md              # Project documentation
-└── LICENSE                # License information
+Here's a brief overview of the project structure:
+
+```
+.
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── docker-compose.yaml
+├── notebooks
+│   ├── numbeo-v2.ipynb
+│   ├── numbeo-v3.ipynb
+│   ├── numbeo-v4.ipynb
+│   └── numbeo.ipynb
+├── requirements.txt
+└── src
+    ├── country_name_extractor.py
+    ├── numbeo_web_crawler.py
+    ├── run.py
+    └── utils
+        └── db.py
 ```
 
-## Contributing
+- `Dockerfile`: Defines the Docker image for the project.
+- `docker-compose.yaml`: Configuration for Docker Compose to set up services.
+- `requirements.txt`: Python package dependencies.
+- `src/`: Source code directory.
+  - `country_name_extractor.py`: Extracts country names from the Numbeo website.
+  - `numbeo_web_crawler.py`: Scrapes cost of living data.
+  - `run.py`: Entry point for executing the project.
+  - `utils/db.py`: Utility functions for database operations.
+- `notebooks/`: Jupyter notebooks for analysis and experimentation.
 
-Contributions are welcome! Please fork the repository and submit a pull request with your changes. Make sure to follow the coding guidelines and write tests for any new features.
+## Requirements
 
-## License
+Before setting up the project, ensure you have the following installed on your system:
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+- Docker
+- Docker Compose
+- Python 3.11 or later
 
-## Acknowledgments
+## Setup and Installation
 
-- [Numbeo](https://www.numbeo.com) for providing the data source.
-- Contributors and open-source community for their valuable input.
+Follow these steps to set up the project:
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/sinanazem/numbeo-web-crawling.git
+   cd numbeo-web-crawling
+   ```
+
+2. **Build and Start Docker Containers**
+
+   Build the Docker image and start the containers using Docker Compose:
+
+   ```bash
+   docker-compose up --build
+   ```
+
+   This will create and start the necessary containers for the project, including the PostgreSQL database.
+
+3. **Access the Docker Container**
+
+   You can access the running container to interact with the application:
+
+   ```bash
+   docker-compose exec app /bin/bash
+   ```
+
+4. **Install Python Dependencies**
+
+   Inside the container, install the required Python packages:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+
+1. **Extract Country Names**
+
+   Run the script to extract country names:
+
+   ```bash
+   python src/country_name_extractor.py
+   ```
+
+2. **Scrape Cost of Living Data**
+
+   Execute the web crawler to scrape the cost of living data:
+
+   ```bash
+   python src/numbeo_web_crawler.py
+   ```
+
+3. **Run the Application**
+
+   To run the full application:
+
+   ```bash
+   python src/run.py
+   ```
+
